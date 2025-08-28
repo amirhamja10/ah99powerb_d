@@ -1,0 +1,30 @@
+<?php
+session_start();
+if (isset($_POST['username'])) {
+    $admin_user = "admin";
+    $admin_pass = "1234";
+
+    if ($_POST['username'] == $admin_user && $_POST['password'] == $admin_pass) {
+        $_SESSION['admin'] = true;
+        header("Location: dashboard.php");
+        exit();
+    } else {
+        $error = "ভুল ইউজারনেম বা পাসওয়ার্ড!";
+    }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+</head>
+<body>
+<h2>অ্যাডমিন লগইন</h2>
+<?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+<form method="POST">
+    <input type="text" name="username" placeholder="Username"><br>
+    <input type="password" name="password" placeholder="Password"><br>
+    <button type="submit">Login</button>
+</form>
+</body>
+</html>
